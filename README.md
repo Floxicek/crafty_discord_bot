@@ -1,3 +1,6 @@
+# Checkout original [repo](https://github.com/Coosanta17/crafty_discord_bot) from [Coosanta17](https://github.com/Coosanta17)
+This fork adds a feature where a popup appears after server shutdown. If the popup is not interacted with, it will turn off the Windows computer.
+
 # Crafty Controller Discord Bot.
 
 > A Discord Bot to interact with and control [Crafty Controller](https://craftycontrol.com/) through commands in chat 
