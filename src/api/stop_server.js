@@ -4,6 +4,7 @@ import { config } from "../config.js";
 import { stopOptions } from "./client.js";
 import { getStats } from "./get_stats.js";
 import { dateTimeToMilliseconds, minutesToMilliseconds, startInterval, stopInterval } from "../util.js";
+import { exec } from "child_process";
 
 const waitTime = minutesToMilliseconds(config.auto_stop.empty_wait_time);
 const checkInterval = config.auto_stop.check_interval;
@@ -12,12 +13,23 @@ const stats = await getStats();
 let checkedLastLogout = false;
 let timeSinceLastLogout = null;
 
+let path = 'sleep_popup.bat'
+
 export function setAutoStopInterval() {
     startInterval(autoStop, minutesToMilliseconds(checkInterval), "autoStopInterval");
 }
 
 export async function serverStop() {
     console.log("Stopping server...");
+
+    exec(path, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error: ${error.message}`);
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    console.error(`stderr: ${stderr}`);
+    });
 
     const stopResponse = await axios(stopOptions); // Call API to stop server.
 
